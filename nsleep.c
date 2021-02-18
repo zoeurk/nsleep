@@ -46,11 +46,12 @@ void usage(char **args){
 	printf("%s [OPTIONS]\n", *args);
 	printf("Options:\n");
 	printf("\t-d day         day (max: 106751)\n");
-	printf("\t-h hours       hours (max: 23)\n");
+	printf("\t-H hours       hours (max: 23)\n");
 	printf("\t-m minutes     minutes (max: 59)\n");
 	printf("\t-s seconds     seconds (max: 59)\n");
 	printf("\t-M millisconds milliseconds (max: 999)\n");
 	printf("\t-n nanoseconds nanoseconds (max: 999999)\n");
+	printf("\t-(h|?)         show this message\n");
 	printf("Bug repport: zoeurk@gmail.com\n");
 	exit(EXIT_SUCCESS);
 }
@@ -81,7 +82,7 @@ int args(int argc, char **argv, struct timespec *req){
 				req->tv_sec += temp*60*60*24;
 				i++;
 				break;
-			case 'h':
+			case 'H':
 				if(argc <= i+1)
 					missing_arguments(argv[i]);
 				arguments(argv, i);
@@ -136,6 +137,7 @@ int args(int argc, char **argv, struct timespec *req){
 				req->tv_nsec += temp;
 				i++;
 				break;
+			case 'h':
 			case '?':
 				usage(argv);
 			default:
